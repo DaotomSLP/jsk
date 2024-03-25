@@ -24,6 +24,28 @@
                                 @endforeach
                             </div>
                         </div>
+                        @if (isset(Auth::user()->name))
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle Text-secondary" href="#"
+                                    id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="fa fa-user"></i> {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/profile">
+                                        {{ __('navbar.profile') }}
+                                    </a>
+                                    <a class="dropdown-item" href="/orders?status=success">
+                                        {{ __('navbar.orders') }}
+                                    </a>
+                                </div>
+                            </div>
+                        @else
+                            <button class="btn Btn-outline-secondary px-5" data-toggle="modal"
+                                data-target="#loginModal-1">
+                                {{ __('home.login') }}
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -52,7 +74,8 @@
                             @endforeach
                         </div>
                     </li>
-                    <li class="nav-item dropdown {{ Request::is('showPastWorks') || Request::is('showPresentWorks') || Request::is('showFutureWorks') ? 'active' : '' }}">
+                    <li
+                        class="nav-item dropdown {{ Request::is('showPastWorks') || Request::is('showPresentWorks') || Request::is('showFutureWorks') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04111" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">{{ __('home.project') }}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04111">
@@ -91,5 +114,60 @@
         </div>
     </div>
     <!-- END nav -->
+
+    <div class="modal fade mt-5" id="loginModal-1" tabindex="-1" role="dialog" aria-labelledby="loginLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="card bg-dark card-shadow" bis_skin_checked="1">
+                        <div class="card-body p-5">
+                            <div class="pb-3">
+                                <img src="{{ URL::asset('/img/design/JSK-logo.jpeg') }}" class="img-fluid"
+                                    style="max-height: 50px">
+                            </div>
+                            <p class="h3 Text-secondary text-uppercase mb-2 mt-3">{{ __('home.login') }}</p>
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div class="input-group my-4">
+                                    <span class="input-group-text" id="email">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="email"
+                                        aria-label="email" aria-describedby="email" name="email" required>
+                                </div>
+                                <div class="input-group my-4">
+                                    <span class="input-group-text" id="password">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                    <input type="password" class="form-control" placeholder="password"
+                                        aria-label="password" aria-describedby="password" name="password" required>
+                                </div>
+                                <div class="my-4">
+                                    <button type="submit" class="btn Btn-outline-secondary px-5">
+                                        {{ __('home.login') }}
+                                    </button>
+                                </div>
+                                <hr />
+                                <p class="text-white mb-0">
+                                    {{ __('home.do_you_have_account') }}
+                                </p>
+                                <a href="/register">
+                                    <p class="text-white mb-0 text-underline">
+                                        {{ __('home.register') }}
+                                    </p>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>

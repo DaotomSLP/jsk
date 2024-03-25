@@ -28,5 +28,8 @@ return [
     'contact' => 'Contact',
     'contact_us' => 'Contact Us',
     'show_location' => 'Show Location',
-    'all_lamp' => 'All Lighting'
+    'all_lamp' => 'All Lighting',
+    'login' => 'Login',
+    'register' => 'Register',
+    'do_you_have_account' => 'Do you have user account?'
 ];

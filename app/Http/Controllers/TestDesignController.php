@@ -7,6 +7,7 @@ use App\Models\FloorPlanSlideImages;
 use App\Models\FutureWorkImages;
 use App\Models\FutureWorks;
 use App\Models\HomeSlideImages;
+use App\Models\Orders;
 use App\Models\PastWorkImages;
 use App\Models\PastWorks;
 use App\Models\PlanPackages;
@@ -21,6 +22,8 @@ use App\Models\TopSellingSlideImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\Lamps;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TestDesignController extends Controller
 {
@@ -172,7 +175,8 @@ class TestDesignController extends Controller
             ->where('plans.id', $id)
             ->get();
 
-        $planPackages = PlanPackages::join('plans', 'planPackages.plan_id', 'plans.id')
+        $planPackages = PlanPackages::select('planPackages.*')
+            ->join('plans', 'planPackages.plan_id', 'plans.id')
             ->where('plans.id', $id)
             ->get();
 
@@ -329,5 +333,67 @@ class TestDesignController extends Controller
         $lamp_categories = LampCategories::all();
 
         return view('testdesign.lamps', compact('lamps', 'categories', 'lamp_categories', 'pagination'));
+    }
+
+    private function generateOrderUniqueCode($length = 6)
+    {
+        $code = Str::random($length);
+
+        // Check if the generated code already exists in the database
+        while (Orders::where('order_no', '#' . $code)->exists()) {
+            $code = Str::random($length);
+        }
+
+        return $code;
+    }
+
+    public function orders(Request $request)
+    {
+        if ($request->status) {
+            $ordersQuery = orders::select('orders.order_no', 'plans.*', 'categories.cate_name', 'categories.cate_en_name', 'categories.cate_cn_name', 'planPackages.name', 'planPackages.en_name', 'planPackages.cn_name', 'planPackages.price')
+                ->join('plans', 'orders.plan_id', 'plans.id')
+                ->join('categories', 'plans.category', 'categories.id')
+                ->join('planPackages', 'orders.plan_package_id', 'planPackages.id')
+                ->where('orders.user_id', Auth::user()->id)
+                ->where('orders.status', $request->status);
+
+            $allOrder = $ordersQuery->count();
+
+            if ($request->page) {
+                $ordersQuery->offset(($request->page - 1) * 15);
+            }
+
+            $orders = $ordersQuery->limit(15)
+                ->get();
+
+            $pagination = [
+                'offsets' => ceil($allOrder / 15),
+                'offset' => $request->page ? $request->page : 1,
+                'all' => $allOrder
+            ];
+
+            $status = $request->status;
+            $categories = Categories::all();
+
+            return view('testdesign.orders', compact('orders', 'status', 'categories', 'pagination'));
+        } else {
+            return redirect('/orders?status=success');
+        }
+    }
+
+    public function order(Request $request)
+    {
+        $order = new Orders;
+        $order->order_no = '#' . $this->generateOrderUniqueCode();
+        $order->plan_id = $request->plan_id;
+        echo $request->plan_package_id;
+        $order->plan_package_id = $request->plan_package_id;
+        $order->user_id = Auth::user()->id;
+
+        if ($order->save()) {
+            return redirect('/')->with(['error' => 'insert_success']);
+        } else {
+            return redirect('/')->with(['error' => 'not_insert']);
+        }
     }
 }

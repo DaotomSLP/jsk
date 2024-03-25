@@ -184,6 +184,7 @@ Route::post('/updateLampCategory', [LampCategoryController::class, 'update'])->m
 Route::post('/addLampCategory', [LampCategoryController::class, 'insert'])->middleware('auth')->name('addLampCategory');
 
 //test design
+
 Route::get('/', [TestDesignController::class, 'index'])->name('index');
 
 Route::get('/home', [TestDesignController::class, 'index'])->name('index');
@@ -209,3 +210,7 @@ Route::get('/futureWorkDetail/{id}', [TestDesignController::class, 'futureWorkDe
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
 
 Route::get('/lamps', [TestDesignController::class, 'lamps'])->name('lamps');
+
+Route::get('/orders', [TestDesignController::class, 'orders'])->middleware('auth')->name('orders');
+
+Route::post('/order', [TestDesignController::class, 'order'])->middleware('auth')->name('order');

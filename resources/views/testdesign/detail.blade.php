@@ -134,35 +134,69 @@
                 @endif
             </div>
             <div class="col-lg-4 mt-5 mt-lg-1">
-                <div class="card bg-dark card-shadow"card-shadow>
-                    <div class="card-body">
-                        @foreach ($planPackages as $planPackage)
-                            <div class="row">
-                                <div class="col-lg-7 col-7">
-                                    <p class="text-white mb-0 text-uppercase">
-                                        {{ App::getLocale() == 'la' ? $planPackage->name : (App::getLocale() == 'en' ? ($planPackage->en_name ? $planPackage->en_name : $planPackage->name) : ($planPackage->cn_name ? $planPackage->cn_name : $planPackage->name)) }}
-                                    </p>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="h4 font-weight-bolder text-uppercase headertext-symbol Text-secondary">
+                            {{ __('detail.select_plan_set') }}
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <div class="card bg-dark card-shadow"card-shadow>
+                            <form method="POST" action="/order">
+                                @csrf
+                                <input hidden name="plan_id" value="{{ $plan->id }}" />
+                                <div class="card-body">
+                                    @foreach ($planPackages as $key => $planPackage)
+                                        <div class="form-check" id="plansPackageRadio">
+                                            <input class="form-check-input" type="radio" name="plan_package_id"
+                                                id="flexRadioDefault-{{ $key }}" value="{{ $planPackage->id }}"
+                                                {{ $key == '0' ? 'checked' : '' }}>
+                                            <label class="form-check-label d-block"
+                                                for="flexRadioDefault-{{ $key }}">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-7">
+                                                        <p class="text-white mb-0 text-uppercase">
+                                                            {{ App::getLocale() == 'la' ? $planPackage->name : (App::getLocale() == 'en' ? ($planPackage->en_name ? $planPackage->en_name : $planPackage->name) : ($planPackage->cn_name ? $planPackage->cn_name : $planPackage->name)) }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-lg-5 col-5">
+                                                        <p class="text-white mb-0">
+                                                            {{ number_format($planPackage->price) }}
+                                                            &#x24;
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <hr />
+                                    @endforeach
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn Btn-outline-secondary px-5 w-100">
+                                                {{ __('detail.order') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="Text-secondary mb-0 text-uppercase">
+                                                {{ __('home.contact') }} :
+                                            </p>
+                                        </div>
+                                        <div class="col-12">
+                                            <a href="https://wa.me/8562055966596" target="_blank">
+                                                <p class="Text-secondary mb-0 text-uppercase">
+                                                    <span class="fa fa-whatsapp"><i class="sr-only">Whatsapp</i></span>
+                                                    +856
+                                                    20
+                                                    55 966 596
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-5 col-5">
-                                    <p class="text-white mb-0">{{ number_format($planPackage->price) }} &#x24;</p>
-                                </div>
-                            </div>
-                            <hr />
-                        @endforeach
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="Text-secondary mb-0 text-uppercase">
-                                    {{ __('home.contact') }} :
-                                </p>
-                            </div>
-                            <div class="col-12">
-                                <a href="https://wa.me/8562055966596" target="_blank">
-                                    <p class="Text-secondary mb-0 text-uppercase">
-                                        <span class="fa fa-whatsapp"><i class="sr-only">Whatsapp</i></span> +856 20
-                                        55 966 596
-                                    </p>
-                                </a>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
