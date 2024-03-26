@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Branchs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,10 +71,8 @@ class UsersController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->branch_id = $request->branch_id;
         $user->is_admin = '0';
         $user->enabled = '1';
-        $user->is_branch = '1';
         $user->phone_no = $request->phone_no;
 
         try {
@@ -92,9 +89,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
-        $branchs = Branchs::where('branchs.enabled', '1')->get();
 
-        return view('editUser', compact('user', 'branchs'));
+        return view('editUser', compact('user'));
     }
 
     public function update(Request $request)
@@ -104,7 +100,6 @@ class UsersController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'branch_id' => $request->branch_id,
             'is_admin' => Auth::user()->id == $request->id ? '1' : '0',
             'enabled' => '1',
             'phone_no' => $request->phone_no
@@ -142,7 +137,6 @@ class UsersController extends Controller
         $result = User::query();
 
         $result->select('users.*')
-            ->where('branch_id', NULL)
             ->where('is_super_admin', NULL);
 
         if ($request->name != '') {
@@ -195,9 +189,6 @@ class UsersController extends Controller
             $user->phone_no = $request->phone_no;
             $user->is_owner = '0';
             $user->is_thai_partner = $request->is_thai;
-            $user->thai_percent = $request->thai_percent ? $request->thai_percent : 0;
-            $user->is_ch_partner = $request->is_ch;
-            $user->ch_percent = $request->ch_percent ? $request->ch_percent : 0;
 
             try {
                 if ($user->save()) {
@@ -230,10 +221,6 @@ class UsersController extends Controller
                 'password' => Hash::make($request->password),
                 'enabled' => '1',
                 'phone_no' => $request->phone_no,
-                'is_thai_partner' => $request->is_thai,
-                'thai_percent' => $request->thai_percent ? $request->thai_percent : 0,
-                'is_ch_partner' => $request->is_ch,
-                'ch_percent' => $request->ch_percent ? $request->ch_percent : 0,
             ];
 
             if (User::where('id', $request->id)->update($user)) {
@@ -256,10 +243,7 @@ class UsersController extends Controller
 
         $result = User::query();
 
-        $result->select('users.*')
-            ->where('branch_id', NULL)
-            // ->where('is_owner', 0)
-            ->where('percent', NULL);
+        $result->select('users.*');
 
         if ($request->name != '') {
             $result->where('users.name', $request->name);

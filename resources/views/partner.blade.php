@@ -54,27 +54,6 @@
                                             </select> --}}
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="1" name="is_thai" id="thai">
-                                                <label for="thai">ຫຸ້ນສ່ວນຂອງໄທ</label>
-                                                <div class="form-group">
-                                                    <label class="bmd-label-floating">ສ່ວນແບ່ງ(%)</label>
-                                                    <input type="number" max="100" name="thai_percent" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="1" name="is_ch" id="ch">
-                                                <label for="ch">ຫຸ້ນສ່ວນຂອງຈີນ</label>
-                                                <div class="form-group">
-                                                    <label class="bmd-label-floating">ສ່ວນແບ່ງ(%)</label>
-                                                    <input type="number" max="100" name="ch_percent" class="form-control">
-                                                </div>
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating">ຊື່</label>
                                                 <input type="text" name="name" class="form-control" required>
@@ -188,12 +167,6 @@
                                             ເບີໂທ
                                         </th>
                                         <th>
-                                            ສ່ວນແບ່ງໄທ
-                                        </th>
-                                        <th>
-                                            ສ່ວນແບ່ງຈີນ
-                                        </th>
-                                        <th>
 
                                         </th>
                                         <th>
@@ -211,12 +184,6 @@
                                                 </td>
                                                 <td>
                                                     {{ $user->phone_no }}
-                                                </td>
-                                                <td>
-                                                    {{ ($user->thai_percent ? $user->thai_percent : 0) ."%"}}
-                                                </td>
-                                                <td>
-                                                    {{ ($user->ch_percent ? $user->ch_percent : 0) ."%"}}
                                                 </td>
                                                 @if (Auth::user()->is_owner == 1)
                                                     <td>
@@ -245,7 +212,7 @@
                 <ul class="pagination justify-content-center">
                     <li class="page-item {{ $pagination['offset'] == 1 ? 'disabled' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] - 1 }}"
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] - 1 }}"
                             aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
@@ -253,12 +220,12 @@
                     </li>
                     <li class="page-item {{ $pagination['offset'] == '1' ? 'active' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page=1">1</a>
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page=1">1</a>
                     </li>
                     @for ($j = $pagination['offset'] - 25; $j < $pagination['offset'] - 10; $j++) @if ($j % 10 == 0 && $j > 1) <li class="page-item
                         {{ $pagination['offset'] == $j ? 'active' : '' }}">
                         <a class="page-link"
-                        href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
+                        href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
                         </li>
                     @else @endif
                     @endfor
@@ -266,7 +233,7 @@
                         @if ($i > 1 && $i <= $pagination['all'])
                             <li class="page-item {{ $pagination['offset'] == $i ? 'active' : '' }}">
                                 <a class="page-link"
-                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $i }}">{{ $i }}</a>
+                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $i }}">{{ $i }}</a>
                             </li>
                         @else
 
@@ -276,13 +243,13 @@
                         @if ($j % 10 == 0 && $j > 1) <li class="page-item
                         {{ $pagination['offset'] == $j ? 'active' : '' }}">
                         <a class="page-link"
-                        href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
+                        href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
                         </li>
                     @else @endif
                     @endfor
                     <li class="page-item {{ $pagination['offset'] == $pagination['offsets'] ? 'disabled' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] + 1 }}"
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] + 1 }}"
                             aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>

@@ -3,7 +3,7 @@
     <a><i class="fa fa-desktop"></i> ຕັ້ງຄ່າລະບົບ <span class="fa fa-chevron-down"></span></a>
     <ul class="nav child_menu">
         <li
-            class="{{ Request::is('categories') || Request::is('categories/*') || Request::is('editBranch/*') ? 'current-page' : '' }}">
+            class="{{ Request::is('categories') || Request::is('categories/*') ? 'current-page' : '' }}">
             <a href="/categories">ໝວດໝູ່</a>
         </li>
         <li

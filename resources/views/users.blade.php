@@ -53,21 +53,6 @@
                                             <input type="text" name="last_name" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        {{-- <div class="form-group">
-                                            <label class="bmd-label-floating">ສາຂາ</label>
-                                            <select class="form-control" id="select_branch" name="branch_id" required>
-                                                <option value="">
-                                                    ເລືອກ
-                                                </option>
-                                                @foreach ($branchs as $branch)
-                                                    <option value="{{ $branch->id }}">
-                                                        {{ $branch->branch_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div> --}}
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
@@ -112,22 +97,6 @@
                                         <div class="form-group">
                                             <label class="bmd-label-floating">ຊື່</label>
                                             <input class="form-control" value="{{ Request::input('name') }}" name="name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">ສາຂາ</label>
-                                            <select class="form-control" id="select_branch" name="branch_id">
-                                                <option value="">
-                                                    ທັງໝົດ
-                                                </option>
-                                                {{-- @foreach ($branchs as $branch)
-                                                    <option {{ Request::input('branch') == $branch->id ? 'selected' : '' }}
-                                                        value="{{ $branch->id }}">
-                                                        {{ $branch->branch_name }}
-                                                    </option>
-                                                @endforeach --}}
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -232,7 +201,7 @@
                 <ul class="pagination justify-content-center">
                     <li class="page-item {{ $pagination['offset'] == 1 ? 'disabled' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] - 1 }}"
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] - 1 }}"
                             aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
@@ -240,12 +209,12 @@
                     </li>
                     <li class="page-item {{ $pagination['offset'] == '1' ? 'active' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page=1">1</a>
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page=1">1</a>
                     </li>
                     @for ($j = $pagination['offset'] - 25; $j < $pagination['offset'] - 10; $j++) @if ($j % 10 == 0 && $j > 1) <li class="page-item
                         {{ $pagination['offset'] == $j ? 'active' : '' }}">
                         <a class="page-link"
-                        href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
+                        href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
                         </li>
                     @else @endif
                     @endfor
@@ -253,7 +222,7 @@
                         @if ($i > 1 && $i <= $pagination['all'])
                             <li class="page-item {{ $pagination['offset'] == $i ? 'active' : '' }}">
                                 <a class="page-link"
-                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $i }}">{{ $i }}</a>
+                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $i }}">{{ $i }}</a>
                             </li>
                         @else
 
@@ -263,13 +232,13 @@
                         @if ($j % 10 == 0 && $j > 1) <li class="page-item
                         {{ $pagination['offset'] == $j ? 'active' : '' }}">
                         <a class="page-link"
-                        href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
+                        href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
                         </li>
                     @else @endif
                     @endfor
                     <li class="page-item {{ $pagination['offset'] == $pagination['offsets'] ? 'disabled' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] + 1 }}"
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] + 1 }}"
                             aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>

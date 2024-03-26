@@ -171,7 +171,7 @@
                 <ul class="pagination justify-content-center">
                     <li class="page-item {{ $pagination['offset'] == 1 ? 'disabled' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] - 1 }}"
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] - 1 }}"
                             aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
@@ -179,7 +179,7 @@
                     </li>
                     <li class="page-item {{ $pagination['offset'] == '1' ? 'active' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page=1">1</a>
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page=1">1</a>
                     </li>
                     @for ($j = $pagination['offset'] - 25; $j < $pagination['offset'] - 10; $j++)
                         @if ($j % 10 == 0 && $j > 1)
@@ -187,7 +187,7 @@
                                 class="page-item
                         {{ $pagination['offset'] == $j ? 'active' : '' }}">
                                 <a class="page-link"
-                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
+                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
                             </li>
                         @else
                         @endif
@@ -196,7 +196,7 @@
                         @if ($i > 1 && $i <= $pagination['all'])
                             <li class="page-item {{ $pagination['offset'] == $i ? 'active' : '' }}">
                                 <a class="page-link"
-                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $i }}">{{ $i }}</a>
+                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $i }}">{{ $i }}</a>
                             </li>
                         @else
                         @endif
@@ -207,14 +207,14 @@
                                 class="page-item
                         {{ $pagination['offset'] == $j ? 'active' : '' }}">
                                 <a class="page-link"
-                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
+                                    href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $j }}">{{ $j }}</a>
                             </li>
                         @else
                         @endif
                     @endfor
                     <li class="page-item {{ $pagination['offset'] == $pagination['offsets'] ? 'disabled' : '' }}">
                         <a class="page-link"
-                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&branch_id={{ Request::input('branch_id') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] + 1 }}"
+                            href="{{ Request::route()->getName() }}?name={{ Request::input('name') }}&enabled={{ Request::input('enabled') }}&email={{ Request::input('email') }}&page={{ $pagination['offset'] + 1 }}"
                             aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>

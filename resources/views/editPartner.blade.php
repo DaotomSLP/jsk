@@ -43,29 +43,6 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" name="is_thai"
-                                                id="thai" {{ $user->is_thai_partner == 1 ? 'checked' : '' }}>
-                                            <label for="thai">ຫຸ້ນສ່ວນຂອງໄທ</label>
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">ສ່ວນແບ່ງ(%)</label>
-                                                <input type="number" max="100" name="thai_percent" value="{{$user->thai_percent}}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" name="is_ch" id="ch" {{ $user->is_ch_partner == 1 ? 'checked' : '' }}>
-                                            <label for="ch">ຫຸ້ນສ່ວນຂອງຈີນ</label>
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">ສ່ວນແບ່ງ(%)</label>
-                                                <input type="number" max="100" name="ch_percent" value="{{$user->ch_percent}}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">ຊື່</label>
                                             <input type="text" value="{{ $user['name'] }}" name="name"
@@ -79,13 +56,6 @@
                                                 class="form-control">
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">ສ່ວນແບ່ງ(%)</label>
-                                            <input type="number" value="{{ $user->percent }}" name="percent"
-                                                class="form-control" required>
-                                        </div>
-                                    </div> --}}
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
