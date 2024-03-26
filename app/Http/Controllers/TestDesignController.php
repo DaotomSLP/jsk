@@ -386,7 +386,6 @@ class TestDesignController extends Controller
         $order = new Orders;
         $order->order_no = '#' . $this->generateOrderUniqueCode();
         $order->plan_id = $request->plan_id;
-        echo $request->plan_package_id;
         $order->plan_package_id = $request->plan_package_id;
         $order->user_id = Auth::user()->id;
 
