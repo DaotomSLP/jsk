@@ -38,6 +38,15 @@
                                     <a class="dropdown-item" href="/orders?status=success">
                                         {{ __('navbar.orders') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"
+                                        {{ __('Logout') }}><i class="fa fa-sign-out pull-right"></i>
+                                        Log Out</a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </div>
                             </div>
                         @else
