@@ -4,11 +4,11 @@
         <div class="justify-content-between" style="background-color: black">
             <div class="container order-md-last">
                 <div class="row">
-                    <div class="col-md-6" id="nav-logo">
-                        <a class="navbar-brand" href="/"><img src="{{ URL::asset('/img/design/JSK-logo.jpeg') }}"
-                                class="img-fluid" style="max-height: 50px"></a>
+                    <div class="col-7" id="nav-logo">
+                        <a class="navbar-brand d-flex justify-content-end justify-content-md-start" href="/"><img src="{{ URL::asset('/img/design/JSK-logo.jpeg') }}"
+                                class="img-fluid" id="navbar-brand-logo"></a>
                     </div>
-                    <div class="col-md-6 d-none d-md-flex justify-content-end mb-md-0 mb-3 align-items-center">
+                    <div class="col-5 d-flex justify-content-end mb-md-0 mb-3 align-items-center">
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle Text-secondary" href="#"
                                 id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -29,22 +29,29 @@
                                 <a class="nav-link dropdown-toggle Text-secondary" href="#"
                                     id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <i class="fa fa-user"></i> {{ Auth::user()->name }}
+                                    <i class="fa fa-user"></i> <p class="d-none d-md-inline">
+                                        {{ Auth::user()->name }}
+                                    </p>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="/profile">
+                                        <span class="fa fa-user"> <i class="sr-only">user</i></span>
                                         {{ __('navbar.profile') }}
                                     </a>
                                     <a class="dropdown-item" href="/orders?status=success">
+                                        <span class="fa fa-list-ul"> <i class="sr-only">list</i></span>
                                         {{ __('navbar.orders') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"
-                                        {{ __('Logout') }}><i class="fa fa-sign-out pull-right"></i>
-                                        Log Out</a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                                        {{ __('navbar.logout') }}>
+                                        <p>
+                                            <span class="fa fa-sign-out"> <i class="sr-only">logout</i></span>
+                                            {{ __('navbar.logout') }}
+                                        </p>
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -62,7 +69,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light mt-0 mt-lg-5 pt-lg-2"
         id="ftco-navbar">
-        <div class="container-fluid">
+        {{-- <div class="container-fluid"> --}}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fa fa-bars text-white"></span>
@@ -104,8 +111,9 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        {{-- </div> --}}
     </nav>
+
     <div id="social-float-div" class="card card-body p-2 bg-dark rounded-0">
         <div class="social-media mb-2">
             <p class="mb-0 d-flex">

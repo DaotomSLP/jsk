@@ -12,7 +12,7 @@
 
         <div class="row ">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light">
+                <nav class="tabbar-light">
                     <div class="container-fluid">
                         <div id="ftco-nav">
                             <ul class="navbar-nav m-auto">
@@ -49,15 +49,20 @@
                 <div class="col-12">
                     @foreach ($orders as $order)
                         <div class="row py-2">
-                            <div class="col-2">
+                            <div class="col-12 col-lg-2">
                                 <img class="card-img-top plan-card-image"
                                     src="/img/design/{{ $order->thumbnail ? $order->thumbnail : 'no_image.jpeg' }}"
                                     alt="Card image cap">
                             </div>
-                            <div class="col-4">
-                                <p>
+                            <div class="col-12 col-lg-2">
+                                <p class="h6 font-weight-bolder Text-secondary">
                                     {{ $order->order_no }}
                                 </p>
+                                <p>
+                                    {{ date('d-m-Y', strtotime($order->created_at)) }}
+                                </p>
+                            </div>
+                            <div class="col-6 col-lg-3">
                                 <p class="h6 font-weight-bolder Text-secondary">
                                     {{ App::getLocale() == 'la' ? $order->plan_name : (App::getLocale() == 'en' ? ($order->plan_en_name ? $order->plan_en_name : $order->plan_name) : ($order->plan_cn_name ? $order->plan_cn_name : $order->plan_name)) }}
                                 </p>
@@ -65,7 +70,7 @@
                                     {{ App::getLocale() == 'la' ? $order->cate_name : (App::getLocale() == 'en' ? ($order->cate_en_name ? $order->cate_en_name : $order->cate_name) : ($order->cate_cn_name ? $order->cate_cn_name : $order->cate_name)) }}
                                 </p>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6 col-lg-3">
                                 <p class="text-white font-weight-lighter mb-0">
                                     {{ App::getLocale() == 'la' ? $order->name : (App::getLocale() == 'en' ? ($order->en_name ? $order->en_name : $order->name) : ($order->cn_name ? $order->cn_name : $order->name)) }}
                                 </p>
@@ -73,7 +78,7 @@
                                     {{ number_format($order->price) }} &#x24;
                                 </p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-12 col-lg-2 pt-3 pt-lg-0">
                                 <a href="/order" class="btn Btn-outline-secondary px-5">
                                     {{ __('orders.pay') }}
                                 </a>
@@ -89,13 +94,15 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item {{ $pagination['offset'] == 1 ? 'disabled' : '' }}">
                             <a class="Text-secondary bg-dark page-link"
-                                href="/showPastWorks?page={{ $pagination['offset'] - 1 }}" aria-label="Previous">
+                                href="/orders?status={{ $status }}&page={{ $pagination['offset'] - 1 }}"
+                                aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
                         </li>
                         <li class="page-item {{ $pagination['offset'] == '1' ? 'active' : '' }}">
-                            <a class="Text-secondary bg-dark page-link" href="/showPastWorks?page=1">1</a>
+                            <a class="Text-secondary bg-dark page-link"
+                                href="/orders?status={{ $status }}&page=1">1</a>
                         </li>
                         @for ($j = $pagination['offset'] - 25; $j < $pagination['offset'] - 10; $j++)
                             @if ($j % 10 == 0 && $j > 1)
@@ -103,7 +110,7 @@
                                     class="page-item
                                 {{ $pagination['offset'] == $j ? 'active' : '' }}">
                                     <a class="Text-secondary bg-dark page-link"
-                                        href="/showPastWorks?page={{ $j }}">{{ $j }}</a>
+                                        href="/orders?status={{ $status }}&page={{ $j }}">{{ $j }}</a>
                                 </li>
                             @else
                             @endif
@@ -112,7 +119,7 @@
                             @if ($i > 1 && $i <= $pagination['all'])
                                 <li class="page-item {{ $pagination['offset'] == $i ? 'active' : '' }}">
                                     <a class="Text-secondary bg-dark page-link"
-                                        href="/showPastWorks?page={{ $i }}">{{ $i }}</a>
+                                        href="/orders?status={{ $status }}&page={{ $i }}">{{ $i }}</a>
                                 </li>
                             @else
                             @endif
@@ -123,14 +130,15 @@
                                     class="page-item
                                 {{ $pagination['offset'] == $j ? 'active' : '' }}">
                                     <a class="Text-secondary bg-dark page-link"
-                                        href="/showPastWorks?page={{ $j }}">{{ $j }}</a>
+                                        href="/orders?status={{ $status }}&page={{ $j }}">{{ $j }}</a>
                                 </li>
                             @else
                             @endif
                         @endfor
                         <li class="page-item {{ $pagination['offset'] == $pagination['offsets'] ? 'disabled' : '' }}">
                             <a class="Text-secondary bg-dark page-link"
-                                href="/showPastWorks?page={{ $pagination['offset'] + 1 }}" aria-label="Next">
+                                href="/orders?status={{ $status }}&page={{ $pagination['offset'] + 1 }}"
+                                aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>

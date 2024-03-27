@@ -9905,3 +9905,104 @@ a.text-dark:hover, a.text-dark:focus {
         border-color: #dee2e6;
     }
 }
+
+
+.tabbar-light {
+    background: #252525 !important;
+    z-index: 3;
+    padding: 0;
+}
+
+.tabbar-light .navbar-nav>.nav-item>.nav-link {
+    font-size: 0.85rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: 500;
+    color: #fff;
+    text-transform: uppercase;
+    /* letter-spacing: 2px; */
+    position: relative;
+    opacity: 1 !important;
+}
+
+.tabbar-light .navbar-nav>.nav-item>.nav-link:before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #F0A600;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tabbar-light .navbar-nav>.nav-item>.nav-link:before {
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+}
+
+.tabbar-light .navbar-nav>.nav-item>.nav-link:hover {
+    color: #F0A600;
+}
+
+.tabbar-light .navbar-nav>.nav-item>.nav-link:hover:before {
+    width: 100%;
+}
+
+.tabbar-light .navbar-nav>.nav-item .dropdown-menu {
+    border: none;
+    background: #fff;
+    -webkit-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+    -moz-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+    box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+    border-radius: 4px;
+}
+
+.tabbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item {
+    font-size: 0.85rem;
+    color: #000;
+}
+
+.tabbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item:hover, .tabbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item:focus {
+    background: #F0A600;
+    color: #fff;
+}
+
+.tabbar-light .navbar-nav>.nav-item.cta>a {
+    color: #fff;
+    background: #F0A600;
+    border-radius: 0px;
+}
+
+.tabbar-light .navbar-nav>.nav-item.active>a {
+    color: #F0A600;
+}
+
+.tabbar-light .navbar-toggler {
+    border: none;
+    color: rgba(255, 255, 255, 0.5) !important;
+    cursor: pointer;
+    padding-right: 0;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: .1em;
+}
+
+.tabbar-light .navbar-toggler:focus {
+    outline: none !important;
+}
+
+.tabbar-light .navbar-nav{
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
