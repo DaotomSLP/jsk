@@ -350,7 +350,7 @@ class TestDesignController extends Controller
     public function orders(Request $request)
     {
         if ($request->status) {
-            $ordersQuery = orders::select('orders.order_no', 'plans.*', 'categories.cate_name', 'categories.cate_en_name', 'categories.cate_cn_name', 'planPackages.name', 'planPackages.en_name', 'planPackages.cn_name', 'planPackages.price')
+            $ordersQuery = orders::select('orders.order_no', 'orders.created_at', 'plans.plan_name', 'plans.plan_en_name', 'plans.plan_cn_name', 'plans.thumbnail', 'plans.id AS plan_id', 'categories.cate_name', 'categories.cate_en_name', 'categories.cate_cn_name', 'planPackages.name', 'planPackages.en_name', 'planPackages.cn_name', 'planPackages.price')
                 ->join('plans', 'orders.plan_id', 'plans.id')
                 ->join('categories', 'plans.category', 'categories.id')
                 ->join('planPackages', 'orders.plan_package_id', 'planPackages.id')

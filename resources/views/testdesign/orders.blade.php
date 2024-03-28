@@ -50,22 +50,26 @@
                     @foreach ($orders as $order)
                         <div class="row py-2">
                             <div class="col-12 col-lg-2">
-                                <img class="card-img-top plan-card-image"
-                                    src="/img/design/{{ $order->thumbnail ? $order->thumbnail : 'no_image.jpeg' }}"
-                                    alt="Card image cap">
+                                <a href="/detail/{{ $order->plan_id }}">
+                                    <img class="card-img-top plan-card-image"
+                                        src="/img/design/{{ $order->thumbnail ? $order->thumbnail : 'no_image.jpeg' }}"
+                                        alt="Card image cap">
+                                </a>
                             </div>
                             <div class="col-12 col-lg-2">
                                 <p class="h6 font-weight-bolder Text-secondary">
                                     {{ $order->order_no }}
                                 </p>
                                 <p>
-                                    {{ date('d-m-Y', strtotime($order->created_at)) }}
+                                    {{ date('d-m-Y H:i', strtotime($order->created_at)) }}
                                 </p>
                             </div>
                             <div class="col-6 col-lg-3">
-                                <p class="h6 font-weight-bolder Text-secondary">
-                                    {{ App::getLocale() == 'la' ? $order->plan_name : (App::getLocale() == 'en' ? ($order->plan_en_name ? $order->plan_en_name : $order->plan_name) : ($order->plan_cn_name ? $order->plan_cn_name : $order->plan_name)) }}
-                                </p>
+                                <a href="/detail/{{ $order->plan_id }}">
+                                    <p class="h6 font-weight-bolder Text-secondary">
+                                        {{ App::getLocale() == 'la' ? $order->plan_name : (App::getLocale() == 'en' ? ($order->plan_en_name ? $order->plan_en_name : $order->plan_name) : ($order->plan_cn_name ? $order->plan_cn_name : $order->plan_name)) }}
+                                    </p>
+                                </a>
                                 <p class="text-white font-weight-lighter mb-0">
                                     {{ App::getLocale() == 'la' ? $order->cate_name : (App::getLocale() == 'en' ? ($order->cate_en_name ? $order->cate_en_name : $order->cate_name) : ($order->cate_cn_name ? $order->cate_cn_name : $order->cate_name)) }}
                                 </p>
@@ -78,11 +82,13 @@
                                     {{ number_format($order->price) }} &#x24;
                                 </p>
                             </div>
-                            <div class="col-12 col-lg-2 pt-3 pt-lg-0">
-                                <a href="/order" class="btn Btn-outline-secondary px-5">
-                                    {{ __('orders.pay') }}
-                                </a>
-                            </div>
+                            @if ($status == 'pending')
+                                <div class="col-12 col-lg-2 pt-3 pt-lg-0">
+                                    <a href="/order" class="btn Btn-outline-secondary px-5">
+                                        {{ __('orders.pay') }}
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                         <hr />
                     @endforeach
