@@ -214,3 +214,10 @@ Route::get('/lamps', [TestDesignController::class, 'lamps'])->name('lamps');
 Route::get('/orders', [TestDesignController::class, 'orders'])->middleware('auth')->name('orders');
 
 Route::post('/order', [TestDesignController::class, 'order'])->middleware('auth')->name('order');
+
+Route::get('/profile', [TestDesignController::class, 'profile'])->middleware('auth')->name('profile');
+
+Route::post('/profile', [TestDesignController::class, 'updateProfile'])->middleware('auth')->name('updateProfile');
+
+Route::post('/updatePassword', [TestDesignController::class, 'updatePassword'])->middleware('auth')->name('updatePassword');
+

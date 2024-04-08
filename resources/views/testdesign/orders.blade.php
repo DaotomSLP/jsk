@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <p class="h4 font-weight-bolder text-uppercase headertext-symbol Text-secondary">
-                    {{ __('home.past_project') }} :
+                    {{ __('orders.orders') }} :
                 </p>
             </div>
         </div>

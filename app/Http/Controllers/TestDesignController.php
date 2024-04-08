@@ -22,7 +22,9 @@ use App\Models\TopSellingSlideImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\Lamps;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class TestDesignController extends Controller
@@ -393,6 +395,56 @@ class TestDesignController extends Controller
             return redirect('/')->with(['error' => 'insert_success']);
         } else {
             return redirect('/')->with(['error' => 'not_insert']);
+        }
+    }
+
+    public function profile(Request $request)
+    {
+        $profile = User::select('users.*')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+
+        $categories = Categories::all();
+        return view('testdesign.profile', compact('profile', 'categories'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $profile = [
+            'email' => $request->email,
+            'phone_no' => $request->phone_no,
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+        ];
+
+        if (User::where('id', Auth::user()->id)->update($profile)) {
+            return redirect('profile')->with(['error' => 'edit_success']);
+        } else {
+            return redirect('profile')->with(['error' => 'not_insert']);
+        }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        if ($request->current_password != $request->new_password) {
+            return redirect('profile')->with(['error' => 'password_not_match']);
+        } else {
+            $user = User::where('id', Auth::user()->id)->first();
+            $passwordCheck = Hash::check($request->current_password, $user->password);
+            if (!$passwordCheck) {
+                return redirect('profile')->with(['error' => 'password_invalid']);
+            }
+            $newPasswordHash = Hash::make($request->new_password);
+
+            $profile = [
+                'password' => $newPasswordHash,
+            ];
+
+            if (User::where('id', Auth::user()->id)->update($profile)) {
+                return redirect('profile')->with(['error' => 'edit_success']);
+            } else {
+                return redirect('profile')->with(['error' => 'not_insert']);
+            }
         }
     }
 }
